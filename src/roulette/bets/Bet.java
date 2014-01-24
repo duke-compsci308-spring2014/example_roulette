@@ -1,4 +1,4 @@
-package roulette;
+package roulette.bets;
 
 
 /**
@@ -6,7 +6,7 @@ package roulette;
  * 
  * @author Robert C. Duvall
  */
-public class Bet
+public abstract class Bet
 {
     private String myDescription;
     private int myOdds;
@@ -41,16 +41,22 @@ public class Bet
     {
         return myDescription;
     }
-    
+
+
+    /**
+     * @return string representation of this bet
+     */
+    public String toString ()
+    {
+        return getDescription();
+    }
+
 
     /**
      * Place the given bet by prompting the user for the specific information
      * need to complete the given bet.
      */
-    public String place ()
-    {
-        return "";
-    }
+    public abstract void place ();
 
 
     /**
@@ -60,8 +66,5 @@ public class Bet
      * @param betChoice specific value user chose to try to win the bet
      * @param wheel information needed to check if bet won or lost
      */
-    public boolean isMade (String betChoice, Wheel wheel)
-    {
-    	return false;
-    }
+    public abstract boolean isMade (String color, int number);
 }

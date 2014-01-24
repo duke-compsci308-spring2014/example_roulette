@@ -60,6 +60,7 @@ public class Wheel
             RED,
             GREEN
         };
+	public static final int MAX_NUMBER = OUR_SPOTS.length - 1;
 
     private int myNumSpins;
     private int myValue;
