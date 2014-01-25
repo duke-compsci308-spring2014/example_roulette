@@ -1,6 +1,6 @@
-package roulette;
+package roulette.bets;
 
-import roulette.bets.Bet;
+import roulette.Wheel;
 import util.ConsoleReader;
 
 public class HighLow extends Bet

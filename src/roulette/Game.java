@@ -1,6 +1,7 @@
 package roulette;
 
 import roulette.bets.Bet;
+import roulette.bets.HighLow;
 import roulette.bets.OddEven;
 import roulette.bets.RedBlack;
 import roulette.bets.Consecutive;
