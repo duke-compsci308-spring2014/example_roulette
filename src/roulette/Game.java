@@ -24,8 +24,8 @@ public class Game
             new RedBlack("Red or Black", 1),
             new OddEven("Odd or Even", 1),
             new HighLow("High or Low", 1),
-            new Consecutive("Three in a Row", 35, 1),
-            new Consecutive("Three in a Row", 17, 2),
+            new Consecutive("One in a Row", 35, 1),
+            new Consecutive("Two in a Row", 17, 2),
             new Consecutive("Three in a Row", 11, 3),
         };
 
