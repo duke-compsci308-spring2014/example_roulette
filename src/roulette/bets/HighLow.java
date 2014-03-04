@@ -8,6 +8,11 @@ public class HighLow extends Bet
     private String myChoice;
 
 
+    public HighLow ()
+    {
+        this("High or Low", 1);
+    }
+
     public HighLow (String description, int odds)
     {
         super(description, odds);

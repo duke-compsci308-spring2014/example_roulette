@@ -9,6 +9,10 @@ public class Consecutive extends Bet
     private int myStart;
     private int myRange;
 
+    public Consecutive ()
+    {
+        this("Three in a Row", 11, 3);
+    }
 
     public Consecutive (String description, int odds, int range)
     {

@@ -7,7 +7,12 @@ public class OddEven extends Bet
 {
     private String myChoice;
 
-    
+
+    public OddEven ()
+    {
+        this("Odd or Even", 1);
+    }
+
     public OddEven (String description, int odds)
     {
         super(description, odds);

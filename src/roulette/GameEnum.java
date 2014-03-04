@@ -1,10 +1,6 @@
 package roulette;
 
-import roulette.bets.Bet;
-import roulette.bets.HighLow;
-import roulette.bets.OddEven;
-import roulette.bets.RedBlack;
-import roulette.bets.Consecutive;
+import roulette.bets.BetEnum;
 import util.ConsoleReader;
 
 
@@ -13,27 +9,18 @@ import util.ConsoleReader;
  * 
  * @author Robert C. Duvall
  */
-public class Game
+public class GameEnum
 {
     // constants
     private static final String DEFAULT_NAME = "Roulette";
-    private static final Bet[] POSSIBLE_BETS =
-        {
-            new RedBlack("Red or Black", 1),
-            new OddEven("Odd or Even", 1),
-            new HighLow("High or Low", 1),
-            new Consecutive("One in a Row", 35, 1),
-            new Consecutive("Two in a Row", 17, 2),
-            new Consecutive("Three in a Row", 11, 3),
-        };
-    // mutable state
+    // game state
     private Wheel myWheel;
 
 
     /**
      * Construct the game.
      */
-    public Game ()
+    public GameEnum ()
     {
         myWheel = new Wheel();
     }
@@ -61,7 +48,7 @@ public class Game
     {
         int amount = ConsoleReader.promptRange("How much do you want to bet", 
                                                0, player.getBankroll());
-        Bet b = promptForBet();
+        BetEnum b = promptForBet();
         b.place();
 
         System.out.print("Spinning ...");
@@ -85,16 +72,17 @@ public class Game
     /**
      * Prompt the user to make a bet from a menu of choices.
      */
-    private Bet promptForBet ()
+    private BetEnum promptForBet ()
     {
+        BetEnum[] possibleBets = BetEnum.values();
         System.out.println("You can make one of the following types of bets:");
-        for (int k = 0; k < POSSIBLE_BETS.length; k++)
+        for (int k = 0; k < possibleBets.length; k++)
         {
-            System.out.println((k + 1) + ") " + POSSIBLE_BETS[k]);
+            System.out.println((k + 1) + ") " + possibleBets[k]);
         }
 
         int response = ConsoleReader.promptRange("Please make a choice",
-                                                 1, POSSIBLE_BETS.length);
-        return POSSIBLE_BETS[response - 1];
+                                                 1, possibleBets.length);
+        return possibleBets[response - 1];
     }
 }

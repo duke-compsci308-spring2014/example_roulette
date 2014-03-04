@@ -1,10 +1,10 @@
 package roulette;
 
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.ResourceBundle;
 import roulette.bets.Bet;
-import roulette.bets.HighLow;
-import roulette.bets.OddEven;
-import roulette.bets.RedBlack;
-import roulette.bets.Consecutive;
 import util.ConsoleReader;
 
 
@@ -13,29 +13,44 @@ import util.ConsoleReader;
  * 
  * @author Robert C. Duvall
  */
-public class Game
+public class GameReflect
 {
     // constants
-    private static final String DEFAULT_NAME = "Roulette";
-    private static final Bet[] POSSIBLE_BETS =
-        {
-            new RedBlack("Red or Black", 1),
-            new OddEven("Odd or Even", 1),
-            new HighLow("High or Low", 1),
-            new Consecutive("One in a Row", 35, 1),
-            new Consecutive("Two in a Row", 17, 2),
-            new Consecutive("Three in a Row", 11, 3),
-        };
+    public static final String DEFAULT_NAME = "Roulette";
+    public static final String DEFAULT_BETS = "resources/bets";
     // mutable state
     private Wheel myWheel;
+    private List<Bet> myBets;
 
 
     /**
      * Construct the game.
      */
-    public Game ()
+    public GameReflect ()
     {
         myWheel = new Wheel();
+        myBets = makeBets();
+    }
+
+
+    private List<Bet> makeBets ()
+    {
+        List<Bet> results = new ArrayList<Bet>();
+        ResourceBundle resources = ResourceBundle.getBundle(DEFAULT_BETS);
+        Enumeration<String> iter = resources.getKeys();
+        while (iter.hasMoreElements())
+        {
+            try
+            {
+                Class<?> clss = Class.forName(resources.getString(iter.nextElement()));
+                results.add((Bet)clss.newInstance());
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return results;
     }
 
 
@@ -88,13 +103,13 @@ public class Game
     private Bet promptForBet ()
     {
         System.out.println("You can make one of the following types of bets:");
-        for (int k = 0; k < POSSIBLE_BETS.length; k++)
+        for (int k = 0; k < myBets.size(); k++)
         {
-            System.out.println((k + 1) + ") " + POSSIBLE_BETS[k]);
+            System.out.println((k + 1) + ") " + myBets.get(k));
         }
 
         int response = ConsoleReader.promptRange("Please make a choice",
-                                                 1, POSSIBLE_BETS.length);
-        return POSSIBLE_BETS[response - 1];
+                                                 1, myBets.size());
+        return myBets.get(response - 1);
     }
 }

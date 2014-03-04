@@ -9,7 +9,12 @@ public class RedBlack extends Bet
     private String myChoice;
 
 
-	public RedBlack (String description, int odds)
+    public RedBlack ()
+    {
+        this("Red or Black", 1);
+    }
+
+    public RedBlack (String description, int odds)
     {
         super(description, odds);
     }
